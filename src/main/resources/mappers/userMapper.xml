@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.weibiansanjueserver.dao.UserDao">
+
+    <select id="getFans" resultType="com.example.weibiansanjueserver.entity.User" parameterType="String">
+        select * from user u
+        left join user_fans uf on u.user_id=uf.fans_id
+        where
+        uf.user_id=#{userId}
+        order by u.fans_counts desc
+    </select>
+
+    <update id="addFanCount" parameterType="String">
+        update user set fans_counts=fans_counts+1 where user_id=#{userId}
+    </update>
+
+    <update id="reduceFanCount" parameterType="String">
+        update user set fans_counts=fans_counts-1 where user_id=#{userId}
+    </update>
+
+    <update id="addFollersCount" parameterType="String">
+        update user set follow_counts=follow_counts+1 where user_id=#{userId}
+    </update>
+
+    <update id="reduceFollersCount" parameterType="String">
+        update user set follow_counts=follow_counts-1 where user_id=#{userId}
+    </update>
+
+</mapper>
