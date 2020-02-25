@@ -11,6 +11,7 @@ import org.n3r.idworker.Sid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,19 +105,21 @@ public class UserServiceImpl implements UserService {
     }
 
     //关注
+    @Transactional
     @Override
     public void saveUserFollow(String userId, String fansId) {
-        userDao.addFollersCount(fansId);
-        userDao.addFanCount(userId);
         String id= sid.nextShort();
         UserFans userFans=new UserFans();
         userFans.setId(id);
         userFans.setUserId(userId);
         userFans.setFansId(fansId);
         userFansDao.insert(userFans);
+        userDao.addFollersCount(fansId);
+        userDao.addFanCount(userId);
     }
 
     //取消关注
+    @Transactional
     @Override
     public void reduceFollow(String userId, String fansId) {
         QueryWrapper<UserFans> queryWrapper=new QueryWrapper<>();
