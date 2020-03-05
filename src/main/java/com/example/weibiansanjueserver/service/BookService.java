@@ -29,4 +29,20 @@ public interface BookService {
     //书城首页已完结
     List<Books> finish();
 
+    //查询所有通过审核书
+    IPage<Books> booksList(Integer page,Integer size);
+
+    //查询为通过审核的数
+    IPage<Books> checkBooksList(Integer page,Integer size);
+
+    //通过审核
+    void successCheck(String bookId);
+
+    //驳回
+    void unCheck(String bookId);
+
+    //完结
+    void finish(String bookId);
+
+
 }

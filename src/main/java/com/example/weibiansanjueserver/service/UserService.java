@@ -1,5 +1,6 @@
 package com.example.weibiansanjueserver.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.weibiansanjueserver.entity.User;
 import com.example.weibiansanjueserver.vo.UserVO;
 
@@ -36,7 +37,7 @@ public interface UserService {
     //减少关注
     void reduceFollow(String userId,String fansId);
 
-
+    IPage<User> findAll(Integer page,Integer size);
 
 
 }

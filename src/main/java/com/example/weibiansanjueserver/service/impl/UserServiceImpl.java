@@ -1,6 +1,8 @@
 package com.example.weibiansanjueserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.weibiansanjueserver.dao.UserDao;
 import com.example.weibiansanjueserver.dao.UserFansDao;
 import com.example.weibiansanjueserver.entity.User;
@@ -127,5 +129,14 @@ public class UserServiceImpl implements UserService {
         userFansDao.delete(queryWrapper);
         userDao.reduceFollersCount(fansId);
         userDao.reduceFanCount(userId);
+    }
+
+    @Override
+    public IPage<User> findAll(Integer page,Integer size) {
+        QueryWrapper<User> queryWrapper=new QueryWrapper<>();
+        queryWrapper.orderByDesc("create_time");
+        Page<User> userPage=new Page<>(page,size);
+        IPage<User> userIPage=userDao.selectPage(userPage,queryWrapper);
+        return userIPage;
     }
 }

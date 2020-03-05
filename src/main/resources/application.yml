@@ -8,5 +8,9 @@ spring:
   resources:
     static-locations: classpath:templates/,classpath:static/,file:E:/weibiansanjue
 
+#  freemarker:
+#    settings:
+#      classic_compatible: true
+
 mybatis-plus:
   mapper-locations: classpath*:mappers/**/*.xml

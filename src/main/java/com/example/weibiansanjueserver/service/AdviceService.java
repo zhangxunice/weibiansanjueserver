@@ -1,6 +1,8 @@
 package com.example.weibiansanjueserver.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.weibiansanjueserver.entity.Advice;
+import com.example.weibiansanjueserver.vo.AdviceVO;
 
 import java.util.List;
 
@@ -15,5 +17,5 @@ public interface AdviceService  {
     void saveAdvice(Advice advice);
 
     //查看建议
-    List<Advice> findAdvice();
+    IPage<AdviceVO> findAdvice(Integer page, Integer size);
 }

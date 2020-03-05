@@ -9,10 +9,11 @@ import lombok.Getter;
  */
 
 @Getter
-public enum BookStatusEnum {
+public enum BookStatusEnum implements CodeEnum{
     CHECK(0,"审核中"),
     NEW(1,"连载中"),
-    FINISH(2,"已完结");
+    FINISH(2,"已完结"),
+    UN_CHECK(3,"被驳回");
 
     private Integer code;
 
