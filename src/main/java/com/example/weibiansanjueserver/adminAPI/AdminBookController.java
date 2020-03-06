@@ -26,6 +26,11 @@ public class AdminBookController {
     @Autowired
     private BookService bookService;
 
+    @GetMapping("/index")
+    public ModelAndView index(){
+        return new ModelAndView("book/index");
+    }
+
     @GetMapping("/booklist")
     public ModelAndView booklist(@RequestParam(value = "page",defaultValue = "1") Integer page,
                                  @RequestParam(value = "size",defaultValue = "20")Integer size,

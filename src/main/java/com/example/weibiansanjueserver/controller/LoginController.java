@@ -8,10 +8,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -23,6 +20,7 @@ import java.io.IOException;
  */
 
 @RestController
+@RequestMapping("/user")
 public class LoginController {
 
     public static final String APPID = "wx1f28ea9e34a0740c";
@@ -60,7 +58,7 @@ public class LoginController {
     }
 
     //添加新用户
-    @PostMapping("saveuser")
+    @PostMapping("/saveuser")
     public JSONResult saveUser(@RequestBody User user){
         boolean userIsExist = userService.userIsExist(user.getUserId());
         if (userIsExist){

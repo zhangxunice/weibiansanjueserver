@@ -7,7 +7,7 @@
         </li>
         <#--首页-->
         <li>
-            <a href="/sell/list"><i class="fa fa-fw fa-list-alt"></i> 首页</a>
+            <a href="/admin/index"><i class="fa fa-fw fa-list-alt"></i> 首页</a>
         </li>
 
         <#--图书管理-->
@@ -46,7 +46,16 @@
             <ul class="dropdown-menu" role="menu" style="margin-left: 25px;">
                 <li class="dropdown-header">操作</li>
                 <li><a href="/admin/userlist">普通用户列表</a></li>
-                <li><a href="/sell/category/index">管理员管理</a></li>
+                <li><a href="/admin/adminlist">管理员管理</a></li>
+            </ul>
+        </li>
+
+        <#--轮播图管理-->
+        <li class="dropdown open">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-fw fa-plus"></i> 轮播图管理 <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" style="margin-left: 25px;">
+                <li class="dropdown-header">操作</li>
+                <li><a href="/admin/advice">轮播图</a></li>
             </ul>
         </li>
 

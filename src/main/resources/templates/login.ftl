@@ -28,15 +28,17 @@
         <div class="col-md-3 column">
             <h2 style="margin-top: 100px;margin-left: 40px">韦编三绝后台管理系统</h2>
             <div style="margin-top: 135px">
-            <form role="form">
+            <form role="form" method="post" action="/admin/tologin">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">账号</label><input type="text" class="form-control" id="exampleInputEmail1" />
+                    <label>账号</label>
+                    <input type="text" class="form-control" name="userName"/>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">密码</label><input type="password" class="form-control" id="exampleInputPassword1" />
+                    <label>密码</label>
+                    <input type="password" class="form-control" name="password" />
                 </div>
+                <h5 style="color: red">${msg!''}</h5>
                 <button type="submit" class="btn btn-info btn-lg btn-block" style="margin-top: 20px">登录</button>
-
             </form>
             </div>
         </div>

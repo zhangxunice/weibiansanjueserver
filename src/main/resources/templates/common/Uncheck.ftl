@@ -17,7 +17,7 @@
         <div class="container-fluid">
 
             <div class="row clearfix">
-                <textarea></textarea>
+                <textarea class="form-control" rows="3"></textarea>
             </div>
         </div>
     </div>

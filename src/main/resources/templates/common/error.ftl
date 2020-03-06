@@ -11,7 +11,7 @@
 <body>
 
 <div class="container">
-    <div class="row clearfix">
+    <div class="row clearfix" style="margin-top: 70px">
         <div class="col-md-12 column">
             <div class="alert alert-dismissable alert-danger">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
