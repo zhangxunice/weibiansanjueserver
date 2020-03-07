@@ -121,4 +121,21 @@ public class AdminUserController {
 
     }
 
+    @GetMapping("/disableadmin")
+    public ModelAndView disableAdmin(String adminId,Map map){
+        adminService.disableAdmin(adminId);
+        map.put("msg", "操作成功");
+        map.put("url", "/admin/adminlist");
+        return new ModelAndView("common/success", map);
+    }
+
+    @GetMapping("/recoveryadmin")
+    public ModelAndView recoveryAdmin(String adminId,Map map){
+        adminService.recoveryAdmin(adminId);
+        map.put("msg", "操作成功");
+        map.put("url", "/admin/adminlist");
+        return new ModelAndView("common/success", map);
+    }
+
+
 }

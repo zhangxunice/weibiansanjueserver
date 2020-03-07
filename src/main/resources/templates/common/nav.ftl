@@ -55,7 +55,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-fw fa-plus"></i> 轮播图管理 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu" style="margin-left: 25px;">
                 <li class="dropdown-header">操作</li>
-                <li><a href="/admin/advice">轮播图</a></li>
+                <li><a href="/admin/swiperlist">轮播图</a></li>
             </ul>
         </li>
 

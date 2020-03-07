@@ -27,5 +27,11 @@ public interface AdminService {
     //根据用户名查找
     Admin queryByName(String name);
 
+    //禁用管理员
+    void disableAdmin(String adminId);
+
+    //恢复管理员
+    void recoveryAdmin(String adminId);
+
 
 }

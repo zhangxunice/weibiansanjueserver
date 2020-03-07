@@ -15,6 +15,7 @@ import com.example.weibiansanjueserver.service.AdminService;
 import com.example.weibiansanjueserver.service.RoleService;
 import com.example.weibiansanjueserver.vo.AdminVO;
 import com.example.weibiansanjueserver.vo.AdviceVO;
+import org.apache.commons.lang3.StringUtils;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,9 @@ public class AdminServiceImpl implements AdminService {
         queryWrapper.eq("name",userName).eq("status", AdminStatusEnum.NORMAL.getCode());
         Admin admin = adminDao.selectOne(queryWrapper);
 
+        if (admin==null){
+            return null;
+        }
         AdminVO adminVO=new AdminVO();
         BeanUtils.copyProperties(admin,adminVO);
         AdminRole adminRole1 = adminRoleDao.selectById(admin.getId());
@@ -134,6 +138,24 @@ public class AdminServiceImpl implements AdminService {
         queryWrapper.eq("name",name);
         Admin admin = adminDao.selectOne(queryWrapper);
         return admin;
+    }
+
+    @Override
+    public void disableAdmin(String adminId) {
+        QueryWrapper<Admin> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("id",adminId);
+        Admin admin = adminDao.selectById(adminId);
+        admin.setStatus(AdminStatusEnum.DISABLE.getCode());
+        adminDao.update(admin,queryWrapper);
+    }
+
+    @Override
+    public void recoveryAdmin(String adminId) {
+        QueryWrapper<Admin> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("id",adminId);
+        Admin admin = adminDao.selectById(adminId);
+        admin.setStatus(AdminStatusEnum.NORMAL.getCode());
+        adminDao.update(admin,queryWrapper);
     }
 
 

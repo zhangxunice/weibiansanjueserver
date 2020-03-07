@@ -17,7 +17,7 @@
         <h3 style="margin-left: 20px">管理员列表</h3>
         <button type="button" class="btn btn-info btn-default" style="margin: 10px 20px">
             <a href="/admin/addadmin" style="color:#fff">添加管理员</a>
-            </button>
+        </button>
         <div class="container-fluid">
 
             <div class="row clearfix">
@@ -34,15 +34,20 @@
                         </thead>
                         <tbody>
                         <#list adminList.records as admin>
-                            <tr>
-                                <td>${admin.id}</td>
-                                <td>${admin.name}</td>
-                                <td><span class="label label-info">${admin.adminStatusEnum().msg}</span></td>
-                                <td>${admin.createTime?string("yyyy-MM-dd HH:mm")}</td>
-                                <td><a href="/admin/addadmin?adminId=${admin.id}">修改</a></td>
-                                <td><a href="">禁用</a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>${admin.id}</td>
+                            <td>${admin.name}</td>
+                            <td><span class="label label-info">${admin.adminStatusEnum().msg}</span></td>
+                            <td>${admin.createTime?string("yyyy-MM-dd HH:mm")}</td>
+                            <td><a href="/admin/addadmin?adminId=${admin.id}">修改</a></td>
+                            <td>
+                                <#if admin.adminStatusEnum().code==0>
+                                    <a href="/admin/disableadmin?adminId=${admin.id}">禁用</a>
+                                <#else >
+                                    <a href="/admin/recoveryadmin?adminId=${admin.id}">恢复</a>
+                                </#if>
+                            </td>
+                        </tr>
                         </#list>
                         </tbody>
                     </table>
@@ -56,86 +61,86 @@
                             </li>
 
                             <#if currentPage lte 1>
-                                <li class="disabled">
-                                    <a href=""><span aria-hidden="true">&lt</span></a>
-                                </li>
+                            <li class="disabled">
+                                <a href=""><span aria-hidden="true">&lt</span></a>
+                            </li>
                             <#else>
-                                <li>
-                                    <a href="/admin/adminlist?page=${currentPage-1}">
-                                        <span aria-hidden="true">&lt</span>
-                                    </a>
-                                </li>
+                            <li>
+                                <a href="/admin/adminlist?page=${currentPage-1}">
+                                    <span aria-hidden="true">&lt</span>
+                                </a>
+                            </li>
                             </#if>
 
                             <#if totalPage lte 5>
 
-                                <#list 1..totalPage as index>
-                                    <#if currentPage==index>
-                                        <li class="disabled">
-                                            <a href="/admin/adminlist?page=${index}">${index}</a>
-                                        </li>
-                                    <#else >
-                                        <li>
-                                            <a href="/admin/adminlist?page=${index}">${index}</a>
-                                        </li>
-                                    </#if>
-                                </#list>
+                            <#list 1..totalPage as index>
+                            <#if currentPage==index>
+                            <li class="disabled">
+                                <a href="/admin/adminlist?page=${index}">${index}</a>
+                            </li>
+                            <#else >
+                            <li>
+                                <a href="/admin/adminlist?page=${index}">${index}</a>
+                            </li>
+                            </#if>
+                            </#list>
 
                             <#else>
 
-                                <#if currentPage gte 5>
-                                    <#if currentPage+3 lte totalPage>
-                                        <#list currentPage-2..currentPage+3 as index>
-                                            <#if currentPage==index>
-                                                <li class="disabled">
-                                                    <a href="/admin/adminlist?page=${index}">${index}</a>
-                                                </li>
-                                            <#else >
-                                                <li>
-                                                    <a href="/admin/adminlist?page=${index}">${index}</a>
-                                                </li>
-                                            </#if>
-                                        </#list>
-                                    <#else >
-                                        <#list totalPage-4..totalPage as index>
-                                            <#if currentPage==index>
-                                                <li class="disabled">
-                                                    <a href="/admin/adminlist?page=${index}">${index}</a>
-                                                </li>
-                                            <#else >
-                                                <li>
-                                                    <a href="/admin/adminlist?page=${index}">${index}</a>
-                                                </li>
-                                            </#if>
-                                        </#list>
-                                    </#if>
+                            <#if currentPage gte 5>
+                            <#if currentPage+3 lte totalPage>
+                            <#list currentPage-2..currentPage+3 as index>
+                            <#if currentPage==index>
+                            <li class="disabled">
+                                <a href="/admin/adminlist?page=${index}">${index}</a>
+                            </li>
+                            <#else >
+                            <li>
+                                <a href="/admin/adminlist?page=${index}">${index}</a>
+                            </li>
+                            </#if>
+                            </#list>
+                            <#else >
+                            <#list totalPage-4..totalPage as index>
+                            <#if currentPage==index>
+                            <li class="disabled">
+                                <a href="/admin/adminlist?page=${index}">${index}</a>
+                            </li>
+                            <#else >
+                            <li>
+                                <a href="/admin/adminlist?page=${index}">${index}</a>
+                            </li>
+                            </#if>
+                            </#list>
+                            </#if>
 
-                                <#else >
-                                    <#list 1..5 as index>
-                                        <#if currentPage==index>
-                                            <li class="disabled">
-                                                <a href="/admin/adminlist?page=${index}">${index}</a>
-                                            </li>
-                                        <#else >
-                                            <li>
-                                                <a href="/admin/adminlist?page=${index}">${index}</a>
-                                            </li>
-                                        </#if>
-                                    </#list>
-                                </#if>
+                            <#else >
+                            <#list 1..5 as index>
+                            <#if currentPage==index>
+                            <li class="disabled">
+                                <a href="/admin/adminlist?page=${index}">${index}</a>
+                            </li>
+                            <#else >
+                            <li>
+                                <a href="/admin/adminlist?page=${index}">${index}</a>
+                            </li>
+                            </#if>
+                            </#list>
+                            </#if>
 
                             </#if>
 
                             <#if currentPage gte totalPage>
-                                <li class="disabled">
-                                    <a href=""><span aria-hidden="true">&gt</span></a>
-                                </li>
+                            <li class="disabled">
+                                <a href=""><span aria-hidden="true">&gt</span></a>
+                            </li>
                             <#else >
-                                <li>
-                                    <a href="/admin/adminlist?page=${currentPage+1}">
-                                        <span aria-hidden="true">&gt</span>
-                                    </a>
-                                </li>
+                            <li>
+                                <a href="/admin/adminlist?page=${currentPage+1}">
+                                    <span aria-hidden="true">&gt</span>
+                                </a>
+                            </li>
                             </#if>
 
                             <li>

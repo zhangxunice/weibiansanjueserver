@@ -35,6 +35,10 @@ public class ShiroConfig {
         Map<String,String> filterMap=new LinkedHashMap<>();
         filterMap.put("/admin/tologin", "anon");
         filterMap.put("/admin/adminlist","perms[admin]");
+        filterMap.put("/admin/addadmin","perms[admin]");
+        filterMap.put("/admin/addAdmin","perms[admin]");
+        filterMap.put("/admin/disableadmin","perms[admin]");
+        filterMap.put("/admin/recoveryadmin","perms[admin]");
         //对管理端用户认证
         filterMap.put("/admin/**", "authc");
 
