@@ -32,7 +32,7 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right" style="margin-right: 50px">
                         <li>
-                            <a href="#">欢迎登录</a>
+                            <a href="#">superadmin</a>
                         </li>
                         <li>
                             <a href="#"><span class="glyphicon glyphicon-log-in"></span> </a>

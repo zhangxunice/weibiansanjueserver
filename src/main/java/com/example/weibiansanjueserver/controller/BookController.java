@@ -96,6 +96,13 @@ public class BookController {
         return JSONResult.ok(uploadPathDB);
     }
 
+    //根据id查询书籍
+    @GetMapping("/getbookid")
+    public JSONResult getBookId(String bookId){
+        Books book = bookService.getBookById(bookId);
+        return JSONResult.ok(book);
+    }
+
     //书城正在热更
     @GetMapping("/hotupdate")
     public JSONResult hotUpdate(){
@@ -108,5 +115,26 @@ public class BookController {
     public JSONResult finish(){
         List<Books> booksList = bookService.finish();
         return JSONResult.ok(booksList);
+    }
+
+    //收藏图书
+    @GetMapping("/collectbook")
+    public JSONResult collectBook(String userId,String bookId){
+        bookService.collectBook(userId,bookId);
+        return JSONResult.ok();
+    }
+
+    //取消收藏
+    @GetMapping("/uncollect")
+    public JSONResult unCollect(String userId,String bookId){
+        bookService.unCollect(userId,bookId);
+        return JSONResult.ok();
+    }
+
+    //获取自己的收藏图书
+    @GetMapping("/mycollect")
+    public JSONResult myCollect(String userId){
+        List<Books> books = bookService.myCollect(userId);
+        return JSONResult.ok(books);
     }
 }

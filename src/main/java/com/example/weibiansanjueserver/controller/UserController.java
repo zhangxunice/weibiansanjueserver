@@ -33,9 +33,7 @@ public class UserController {
     @GetMapping("/getuserinfo")
     public JSONResult getUserInfo(String userId){
         User user = userService.queryUser(userId);
-        int i=1;
         return JSONResult.ok(user);
-
     }
 
     //获取关注列表

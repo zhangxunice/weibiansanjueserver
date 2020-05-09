@@ -29,19 +29,14 @@
                             <label>密码</label>
                             <input name="password" type="text" class="form-control" value="${(adminVO.password)!''}"/>
                         </div>
-
                         分配角色<br/><br/>
                         <div class="form-group">
                             <#--<#if (roleList)??>-->
                             <#list roleList as rol>
                                 <label><input name="roles" type="checkbox" value="${rol.id}"
-                                            <#if adminVO??>
-                                                <#list adminVO.roles as arole>
-                                                    <#if (arole.id)?? && arole.id==rol.id>
-                                                        checked
-                                                    </#if>
-                                                </#list>
-                                            </#if>
+                                            <#if adminVO??><#list adminVO.roles as arole>
+                                                    <#if (arole.id)?? && arole.id==rol.id>checked</#if>
+                                                </#list></#if>
                                     />${rol.roleName} </label>
                             </#list>
                             <#--</#if>-->

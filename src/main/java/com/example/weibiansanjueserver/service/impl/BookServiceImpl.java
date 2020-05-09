@@ -3,7 +3,9 @@ package com.example.weibiansanjueserver.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.weibiansanjueserver.dao.BookShelfDao;
 import com.example.weibiansanjueserver.dao.BooksDao;
+import com.example.weibiansanjueserver.entity.Bookshelf;
 import com.example.weibiansanjueserver.entity.Books;
 import com.example.weibiansanjueserver.enums.BookStatusEnum;
 import com.example.weibiansanjueserver.service.BookService;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +30,9 @@ public class BookServiceImpl implements BookService {
     private BooksDao booksDao;
 
     @Autowired
+    private BookShelfDao bookShelfDao;
+
+    @Autowired
     private Sid sid;
 
     @Override
@@ -39,8 +45,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void saveBook(Books books) {
+    public Books getBookById(String id) {
+        QueryWrapper<Books> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("book_id",id);
+        Books books = booksDao.selectOne(queryWrapper);
+        return books;
+    }
 
+    @Override
+    public void saveBook(Books books) {
         booksDao.insert(books);
     }
 
@@ -69,6 +82,40 @@ public class BookServiceImpl implements BookService {
                 .orderByDesc("book_follows").last("limit 3");
         List<Books> booksList = booksDao.selectList(queryWrapper);
         return booksList;
+    }
+
+    @Override
+    public void collectBook(String userId, String bookId) {
+        String id =sid.nextShort();
+        Bookshelf bookShelf=new Bookshelf();
+        bookShelf.setId(id);
+        bookShelf.setUserId(userId);
+        bookShelf.setBookId(bookId);
+        bookShelfDao.insert(bookShelf);
+    }
+
+    @Override
+    public void unCollect(String userId, String bookId) {
+        QueryWrapper<Bookshelf> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId).eq("book_id",bookId);
+        bookShelfDao.delete(queryWrapper);
+    }
+
+
+    @Override
+    public List<Books> myCollect(String userId) {
+        QueryWrapper<Bookshelf> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId);
+        List<Bookshelf> bookShelves = bookShelfDao.selectList(queryWrapper);
+        List<Books> bookList=new ArrayList<>();
+        for (Bookshelf bookShelf:bookShelves){
+            String bookId=bookShelf.getBookId();
+            QueryWrapper<Books> booksQueryWrapper=new QueryWrapper<>();
+            booksQueryWrapper.eq("book_id",bookId);
+            Books books = booksDao.selectOne(booksQueryWrapper);
+            bookList.add(books);
+        }
+        return bookList;
     }
 
     @Override

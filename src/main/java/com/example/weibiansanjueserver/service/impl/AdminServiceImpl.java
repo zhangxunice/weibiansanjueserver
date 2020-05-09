@@ -62,7 +62,9 @@ public class AdminServiceImpl implements AdminService {
         }
         AdminVO adminVO=new AdminVO();
         BeanUtils.copyProperties(admin,adminVO);
-        AdminRole adminRole1 = adminRoleDao.selectById(admin.getId());
+        QueryWrapper<AdminRole> adminRoleQueryWrapper=new QueryWrapper<>();
+        adminRoleQueryWrapper.eq("admin_id",admin.getId());
+        AdminRole adminRole1 = adminRoleDao.selectOne(adminRoleQueryWrapper);
         String roleId = adminRole1.getRoleId();
         String[] strArr = roleId.split(":");
         Set<Role> roleSet=new HashSet<>();
@@ -118,8 +120,9 @@ public class AdminServiceImpl implements AdminService {
         AdminVO adminVO=new AdminVO();
         BeanUtils.copyProperties(admin,adminVO);
 
-
-        AdminRole adminRole1 = adminRoleDao.selectById(admin.getId());
+        QueryWrapper<AdminRole> adminRoleQueryWrapper=new QueryWrapper<>();
+        adminRoleQueryWrapper.eq("admin_id",adminId);
+        AdminRole adminRole1 = adminRoleDao.selectOne(adminRoleQueryWrapper);
         String roleId = adminRole1.getRoleId();
         String[] strArr = roleId.split(":");
         Set<Role> roleSet=new HashSet<>();
