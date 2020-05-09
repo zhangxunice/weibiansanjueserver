@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.weibiansanjueserver.dao.BookShelfDao;
 import com.example.weibiansanjueserver.dao.BooksDao;
+import com.example.weibiansanjueserver.dao.UserDao;
 import com.example.weibiansanjueserver.entity.Bookshelf;
 import com.example.weibiansanjueserver.entity.Books;
 import com.example.weibiansanjueserver.enums.BookStatusEnum;
@@ -31,6 +32,9 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookShelfDao bookShelfDao;
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private Sid sid;
